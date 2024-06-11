@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia dos Namorados</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url(src/image/background.webp);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .card{
+            width: 700px;
+            height: 600px;
+            /* background-color: #f72f50; */
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10%;
+            background-color: aliceblue;
+            padding: 50px 50px;
+
+            
+            
+        }
+        img{
+            width: 300px;
+        }
+
+        .btn{
+            padding: 20px 50px;
+            background-color: #f72f50;
+            border: none;
+            border-radius: 10px;
+            color: antiquewhite;
+            font-size: x-large;
+            font-weight: 600;
+            outline: 2px solid #dfdfdf;
+
+        }
+        .btn:hover{
+            background-color: antiquewhite;
+            color: #f72f50;
+            outline: 2px solid #f72f50;
+            font-weight: 600;
+        }
+        .btn-group{
+            display: flex;
+            gap: 10%;
+        }
+        h1{
+            text-align: center;
+        }
+        h3{
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <img src="src/image/casal1.jpg" alt="" id="image">
+            <h1>Você ama o Bernardo?</h1>
+            <h3>É bem simples, escolha uma das respostas abaixo.<br>Você é totalmente livre para escolher</h3>
+            <div class="btn-group">
+                <button class="btn" type="button" id="btnyes">Sim!</button>
+                <button class="btn" type="button" id="btnno">Não!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>    
+        // Função para gerar uma posição aleatória dentro dos limites da janela
+        function getRandomPosition(element) {
+        var x = window.innerWidth - element.clientWidth;
+        var y = window.innerHeight - element.clientHeight;
+        var randomX = Math.floor(Math.random() * x);
+        var randomY = Math.floor(Math.random() * y);
+        return [randomX, randomY];
+        }
+
+        // Função para mover o botão para uma posição aleatória
+        function moveButtonToRandomPosition() {
+        var button = document.getElementById('btnno'); // ID atualizado para 'btnno'
+        var randomPosition = getRandomPosition(button);
+        button.style.position = 'absolute';
+        button.style.left = randomPosition[0] + 'px';
+        button.style.top = randomPosition[1] + 'px';
+            
+        var frases = [
+            "O que você pensa que está fazendo?",
+            "É realmente isso que eu estou vendo?",
+            "Não tô te entendendo.",
+            "Isso esta sendo inesperado!",
+            "Isso é só uma brincadeira, não é?",
+            "Estou achando isso esquisito..."
+            // Adicione mais frases conforme desejar
+        ];
+
+        var randomIndex = Math.floor(Math.random() * frases.length);
+        var selectedPhrase = frases[randomIndex];
+        document.querySelector('h3').textContent = selectedPhrase;
+
+
+
+        // document.querySelector('h3').textContent = 'O que você pensa que esta fazendo?';
+
+        }
+
+        // Adiciona o evento de passar o mouse (hover) ao botão
+        document.getElementById('btnno').addEventListener('mouseover', moveButtonToRandomPosition);
+
+
+        // função do btnyes
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Função para mudar o texto do h1, a imagem e ocultar os botões
+            function changeContentAndHideButtons() {
+                // Muda o texto do h1
+                document.querySelector('h1').textContent = 'Você é o amor da minha vida! Eu ';
+                
+                // Muda a imagem
+                document.getElementById('image').src = 'src/image/casal2.jpeg'; // Substitua com o caminho da nova imagem
+                
+                // Oculta os botões
+                document.querySelector('h3').style.display = 'none';
+                document.getElementById('btnyes').style.display = 'none';
+                document.getElementById('btnno').style.display = 'none';
+            }
+
+            // Adiciona o evento de clique ao botão com id 'btnyes'
+            document.getElementById('btnyes').addEventListener('click', changeContentAndHideButtons);
+            });
+
+
+        
+    </script>
+</body>
+</html>
